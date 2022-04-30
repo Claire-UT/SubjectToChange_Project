@@ -63,7 +63,7 @@ resized_cropped.astype('int')
 # print(type(resized_cropped))
 show_image(resized_cropped)
 
-# PREDICTIONS ----------------------------------------
+# EMNIST PREDICTIONS ----------------------------------------
 mapping = {    
     # digits
     0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9',
@@ -81,6 +81,40 @@ mapping = {
 
 #adding in neural network:
 model = keras.models.load_model('EMNIST Model')
+# print(resized_cropped)
+resized_cropped = resized_cropped / 255.0
+# !IMPORTANT! below line arbitrarily adds the image into an ndarray of images, since this is the input the model accepts. Assumed that in the future, resized will already contain multiple images (3d ndarray)
+
+resized_cropped = np.array([resized_cropped])
+# print('normallized: ')
+# print(resized_cropped)
+# print(resized_cropped.shape)
+
+numberImages=np.size(resized_cropped, 0)
+# print("numberImages: " + str(numberImages))
+train_images_height = 28
+train_images_width = 28
+resized_cropped= resized_cropped.reshape(numberImages, train_images_height, train_images_width, 1)
+
+            
+predictions=model.predict(resized_cropped)
+# print('done')
+converted = np.argmax(predictions, axis=-1)
+print(converted)
+print(list(mapping[i] for i in converted))
+
+# MATH PREDICTIONS ---------------------------------------
+mapping = {    
+    # digits
+    0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9',
+    
+    # other characters
+    10: '+', 11: '.', 12: '/', 13: '=', 14: '*', 15: '-', 16: 'x', 17: 'y', 18: 'z',
+}
+
+#adding in neural network:
+model = keras.models.load_model('Math Model')
+# print(resized_cropped)
 resized_cropped = resized_cropped / 255.0
 # !IMPORTANT! below line arbitrarily adds the image into an ndarray of images, since this is the input the model accepts. Assumed that in the future, resized will already contain multiple images (3d ndarray)
 

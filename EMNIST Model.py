@@ -121,28 +121,3 @@ print(f"Train Image Shape: {train_images.shape}, Train Label Shape: {train_label
 # # Save model, and then load into file where it is integrated into vision
 # # Reference: https://www.tensorflow.org/guide/keras/save_and_serialize
 # model.save('EMNIST Model')
-
-
-
-# #Let's plot Accuracy vs Val_Accuracy to further evaluation..
-# import seaborn as sns
-# q = len(history.history['accuracy'])
-
-# plt.figsize=(10,10)
-# sns.lineplot(x = range(1,1+q),y = history.history['accuracy'], label='Accuracy')
-# sns.lineplot(x = range(1,1+q),y = history.history['val_accuracy'], label='Val_Accuracy')
-# plt.xlabel('epochs')
-# plt.ylabel('Accuracy')
-
-# train_x2,test_x2,train_y2,test_y2 = train_test_split(train_images,y1,test_size=0.15,random_state = 42)
-
-# history1 = model.fit(train_x2,train_y2,epochs=10,validation_data=(test_x2,test_y2))
-
-
-# q = len(history1.history['accuracy'])
-
-# plt.figsize=(10,10)
-# sns.lineplot(x = range(1,1+q),y = history1.history['accuracy'], label='Accuracy')
-# sns.lineplot(x = range(1,1+q),y = history1.history['val_accuracy'], label='Val_Accuracy')
-# plt.xlabel('epochs')
-# plt.ylabel('Accuracy')
