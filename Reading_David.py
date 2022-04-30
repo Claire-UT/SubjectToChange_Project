@@ -184,3 +184,223 @@ print(list(mapping[i] for i in converted))
 # # need to import numpy as np
 # # original= np.argmax(list_of_lists, axis=-1)
 
+# TESTING THE MATH MODEL-------------------------------------------
+# Model.predict info: https://www.tensorflow.org/api_docs/python/tf/keras/Model#predict
+
+# from sklearn.model_selection import train_test_split
+# import numpy as np
+# import os
+# from PIL import Image
+# import cv2
+
+# imgs = []
+# labels=[]
+
+# #Importing data
+# path = "dataset/0"
+# # converts each image into an np.array, and adds it to the imgs np.array. also creates a label
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('0')
+
+# path = "dataset/1"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('1')
+
+# path = "dataset/2"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('2')
+
+# path = "dataset/3"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('3')
+    
+# path = "dataset/4"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('4')
+    
+# path = "dataset/5"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('5')
+
+# path = "dataset/6"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('6')
+    
+# path = "dataset/7"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('7')
+    
+# path = "dataset/8"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('8')
+    
+# path = "dataset/9"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('9')
+    
+# path = "dataset/add"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('10')
+    
+# path = "dataset/dec"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('11')
+    
+# path = "dataset/div"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('12')
+    
+# path = "dataset/eq"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('13')
+    
+# path = "dataset/mul"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('14')
+    
+# path = "dataset/sub"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('15')
+    
+# path = "dataset/x"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('16')
+    
+# path = "dataset/y"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('17')
+    
+# path = "dataset/z"
+# for f in os.listdir(path):
+#     image=Image.open(os.path.join(path,f))
+#     image=np.array(image)
+#     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+#     image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+#     imgs.append(image2)
+#     labels.append('18')
+    
+# mapping = {    
+#     # digits
+#     0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9',
+    
+#     # other characters
+#     10: '+', 11: '.', 12: '/', 13: '=', 14: '*', 15: '-', 16: 'x', 17: 'y', 18: 'z',
+# }
+
+# #splittinginto train and test
+# train_images, test_images, train_labels,test_labels = train_test_split(imgs, labels, test_size=0.33, random_state=42)
+# train_images=np.asarray(train_images)
+# train_labels=np.asarray(train_labels)
+# test_images=np.asarray(test_images)
+# test_labels=np.asarray(test_labels)
+
+# #loading model
+# model = keras.models.load_model('Math Model')
+
+
+# #maybe individual, maybe list
+# output=model.predict(test_images[0:15])
+# # print(output)
+# #37 outputs, each one corresponds to a class. the highest value is the one with the highest probability
+# converted = np.argmax(output, axis=-1)
+# # print(converted)
+# print(list(mapping[i] for i in converted))
+
+# actual=np.asarray(test_labels[0:15])
+# # print(actual)
+# print(list(mapping[int(i)] for i in actual))
+
+# import matplotlib.pyplot as plt 
+# fig,axes = plt.subplots(3,5,figsize=(10,8))
+# for i,ax in enumerate(axes.flat):
+#     ax.imshow(test_images[i])

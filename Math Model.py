@@ -202,8 +202,12 @@ for f in os.listdir(path):
     labels.append('18')
     
 # FORMATTING DATA SET FOR NEURAL NETWORK------------------------------------------------------------
-print(imgs[0][0][0])
 # splitting dataset into train and test dataset
+print(imgs[0])
+print(labels[0])
+print(len(imgs))
+print(len(labels))
+
 train_images, test_images, train_labels,test_labels = train_test_split(imgs, labels, test_size=0.33, random_state=42)
 train_images=np.asarray(train_images)
 train_labels=np.asarray(train_labels)
@@ -222,7 +226,7 @@ print(f"Train Image Shape: {train_images.shape}, Train Label Shape: {train_label
 for image in train_images:
     for i in range(len(image)):
         image[i] = image[i] / 255
-for image in train_images:
+for image in test_images:
     for i in range(len(image)):
         image[i] = image[i] / 255
         
@@ -269,34 +273,37 @@ model.save('Math Model')
 
 #------------------------------------------------------------------
 
-# TESTING THE MATH MODEL-------------------------------------------
-# Model.predict info: https://www.tensorflow.org/api_docs/python/tf/keras/Model#predict
-mapping = {    
-    # digits
-    0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9',
+# # TESTING THE MATH MODEL-------------------------------------------
+# # Model.predict info: https://www.tensorflow.org/api_docs/python/tf/keras/Model#predict
+# mapping = {    
+#     # digits
+#     0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9',
     
-    # other characters
-    10: '+', 11: '.', 12: '/', 13: '=', 14: '*', 15: '-', 16: 'x', 17: 'y', 18: 'z',
-}
+#     # other characters
+#     10: '+', 11: '.', 12: '/', 13: '=', 14: '*', 15: '-', 16: 'x', 17: 'y', 18: 'z',
+# }
 
-#maybe individual, maybe list
-output=model.predict(test_images[1:15])
-print(output)
-#37 outputs, each one corresponds to a class. the highest value is the one with the highest probability
-converted = np.argmax(output, axis=-1)
-print(converted)
-print(list(mapping[i] for i in converted))
-print(test_labels)
+# #maybe individual, maybe list
+# output=model.predict(test_images[0:15])
+# # print(output)
+# #37 outputs, each one corresponds to a class. the highest value is the one with the highest probability
+# converted = np.argmax(output, axis=-1)
+# # print(converted)
+# print(list(mapping[i] for i in converted))
 
-import matplotlib.pyplot as plt 
-fig,axes = plt.subplots(3,5,figsize=(10,8))
-for i,ax in enumerate(axes.flat):
-    ax.imshow(test_images[i])
+# actual=np.asarray(test_labels[0:15])
+# # print(actual)
+# print(list(mapping[int(i)] for i in actual))
 
-# Convert back from categorical to original labels: https://www.google.com/search?q=tensorflow+convert+back+from+categorical&rlz=1C1VDKB_enUS981US981&oq=tensorflow+convert+back+from+categorical&aqs=chrome..69i57j33i160l2.7491j0j7&sourceid=chrome&ie=UTF-8
-# This line takes a list of lists (each inside list is the binary representation of each category) and converts it back to a list of the original labels
-# need to import numpy as np
-# original= np.argmax(list_of_lists, axis=-1)
+# import matplotlib.pyplot as plt 
+# fig,axes = plt.subplots(3,5,figsize=(10,8))
+# for i,ax in enumerate(axes.flat):
+#     ax.imshow(test_images[i])
+
+# # Convert back from categorical to original labels: https://www.google.com/search?q=tensorflow+convert+back+from+categorical&rlz=1C1VDKB_enUS981US981&oq=tensorflow+convert+back+from+categorical&aqs=chrome..69i57j33i160l2.7491j0j7&sourceid=chrome&ie=UTF-8
+# # This line takes a list of lists (each inside list is the binary representation of each category) and converts it back to a list of the original labels
+# # need to import numpy as np
+# # original= np.argmax(list_of_lists, axis=-1)
 
 # ALTERNATIVE -------------------------------
 
