@@ -60,7 +60,7 @@ print(f"Train Image Shape: {train_images.shape}, Train Label Shape: {train_label
 
 #----- Normalise and reshape data ... NOT SURE IF NEEDED....
 # Normalising wrt to RGB, which has 255 values
-
+print(type(test_images))
 print(test_images)
 train_images = train_images / 255.0
 test_images = test_images / 255.0
