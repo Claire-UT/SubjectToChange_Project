@@ -137,3 +137,50 @@ print(converted)
 print(list(mapping[i] for i in converted))
 
 
+# TESTING THE EMNIST MODEL-------------------------------------------
+# Loading EMNIST model back in
+# Ref: https://www.tensorflow.org/guide/keras/save_and_serialize
+# model = keras.models.load_model('EMNIST Model')
+# print(type(model))
+
+# # Data to test model on:
+# test_images, test_labels = extract_test_samples('letters')
+# test_images, test_labels = extract_test_samples('byclass')
+
+# test_images=test_images[0:15]
+# test_labels=test_labels[0:15]
+# print(test_images)
+# test_images = test_images / 255.0
+
+# test_images_number = test_images.shape[0]
+# test_images_height = 28
+# test_images_width = 28
+# test_images_size = test_images_height*test_images_width
+
+# print(type(test_images))
+# print(test_images)
+# test_images = test_images.reshape(test_images_number, test_images_height, test_images_width, 1)
+
+# number_of_classes=62
+# # y2 = tf.keras.utils.to_categorical(test_labels, number_of_classes)
+
+# # Model.predict info: https://www.tensorflow.org/api_docs/python/tf/keras/Model#predict
+# #maybe individual, maybe list
+# output=model.predict(test_images)
+# print(output)
+# #37 outputs, each one corresponds to a class. the highest value is the one with the highest probability
+# converted = np.argmax(output, axis=-1)
+# print(converted)
+# print(list(mapping[i] for i in converted))
+# print(test_labels)
+
+# import matplotlib.pyplot as plt 
+# fig,axes = plt.subplots(3,5,figsize=(10,8))
+# for i,ax in enumerate(axes.flat):
+#     ax.imshow(test_images[i])
+
+# # Convert back from categorical to original labels: https://www.google.com/search?q=tensorflow+convert+back+from+categorical&rlz=1C1VDKB_enUS981US981&oq=tensorflow+convert+back+from+categorical&aqs=chrome..69i57j33i160l2.7491j0j7&sourceid=chrome&ie=UTF-8
+# # This line takes a list of lists (each inside list is the binary representation of each category) and converts it back to a list of the original labels
+# # need to import numpy as np
+# # original= np.argmax(list_of_lists, axis=-1)
+
