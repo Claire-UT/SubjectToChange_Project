@@ -59,11 +59,30 @@ while True:
     
     #Test Data File Dimensions to be resized to
     dim = (28,28)
-      
+     
+    # EMNIST PREDICTIONS ----------------------------------------
+    mapping = {    
+        # digits
+        0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9',
+        
+        # capital lettes
+        10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F', 16: 'G', 17: 'H', 18: 'I', 19: 'J', 
+        20: 'K', 21: 'L', 22: 'M', 23: 'N', 24: 'O', 25: 'P', 26: 'Q', 27: 'R', 28: 'S', 29: 'T',
+        30: 'U', 31: 'V', 32: 'W', 33: 'X', 34: 'Y', 35: 'Z',
+        
+        # lowercase letters
+        36: 'a', 37: 'b', 38: 'c', 39: 'd', 40: 'e', 41: 'f', 42: 'g', 43: 'h', 44: 'i', 45: 'j', 46: 'k',
+        47: 'l', 48: 'm', 49: 'n', 50: 'o', 51: 'p', 52: 'q', 53: 'r', 54: 's', 55: 't', 56: 'u', 57: 'v',
+        58: 'w', 59: 'x', 60: 'y', 61: 'z',
+    }
+    #adding in neural network:
+    model = keras.models.load_model('EMNIST Model')
     # Looping through the identified contours
     # Then rectangular part is cropped and padded with white space to make square
     # This is resized to 28x28 and also shown in 280x280
     alltext=[]
+    train_images_height = 28
+    train_images_width = 28
     for cnt in contours:
         x, y, w, h = cv2.boundingRect(cnt)
         
@@ -86,9 +105,24 @@ while True:
         #Resize square, padded value to input dim and larger viewable 280x280 size
         resized_cropped = cv2.resize(mask, dim, interpolation = cv2.INTER_AREA)
         Big = cv2.resize(mask, (280,280),interpolation = cv2.INTER_AREA)
+        
+        #converting resized_cropped to a np array, and coverting to float before normaling wrt 255.
         resized_cropped=np.array(resized_cropped)
+        resized_cropped = resized_cropped.astype(float)
+        
+        for row in resized_cropped:
+            for i in range(len(row)):
+                row[i] = row[i] / 255.00
+            
+        # numberImages=np.size(resized_cropped, 0)
+        numberImages=1
+        resized_cropped= resized_cropped.reshape(numberImages, train_images_height, train_images_width, 1)
+        predictions=model.predict(resized_cropped)
         alltext.append(resized_cropped)
         
+        converted = np.argmax(predictions, axis=-1)
+        print(converted)
+        print(mapping.get(converted[0]))
         # print(resized_cropped.astype('int'))
         #cv2.imshow('28x28 Image', resized_cropped)
         #cv2.waitKey(0)
@@ -96,75 +130,17 @@ while True:
     # cv2.imshow('280x280 Image', Big)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
+        alltext.append(mapping.get(converted[0]))
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
     
 alltext=np.array(alltext)
-print(alltext)
+# print(alltext)
 cam.release()
 # Destroy all the windows
 cv2.destroyAllWindows()
 
-resized_cropped=alltext
-
-#ensures that the model receives a 3D array. This would be 2D if there is only one character scanned
-# print(resized_cropped.ndim)
-if resized_cropped.ndim < 3:
-    resized_cropped=[resized_cropped]
-# EMNIST PREDICTIONS ----------------------------------------
-mapping = {    
-    # digits
-    0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9',
-    
-    # capital lettes
-    10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F', 16: 'G', 17: 'H', 18: 'I', 19: 'J', 
-    20: 'K', 21: 'L', 22: 'M', 23: 'N', 24: 'O', 25: 'P', 26: 'Q', 27: 'R', 28: 'S', 29: 'T',
-    30: 'U', 31: 'V', 32: 'W', 33: 'X', 34: 'Y', 35: 'Z',
-    
-    # lowercase letters
-    36: 'a', 37: 'b', 38: 'c', 39: 'd', 40: 'e', 41: 'f', 42: 'g', 43: 'h', 44: 'i', 45: 'j', 46: 'k',
-    47: 'l', 48: 'm', 49: 'n', 50: 'o', 51: 'p', 52: 'q', 53: 'r', 54: 's', 55: 't', 56: 'u', 57: 'v',
-    58: 'w', 59: 'x', 60: 'y', 61: 'z',
-}
-
-#adding in neural network:
-model = keras.models.load_model('EMNIST Model')
-# print(resized_cropped)
-resized_cropped=np.array(resized_cropped)
-# print(resized_cropped[0])
-# print(type(resized_cropped[0][0][0]))
-resized_cropped = resized_cropped.astype(float)
-# resized_cropped = resized_cropped / 255.0
-for image in resized_cropped:
-    for row in image:
-        for i in range(len(row)):
-            row[i] = row[i] / 255.00
-            # print(type(row[i]))
-            
-# print(resized_cropped[0])
-# print(type(resized_cropped[0][0][0]))
-# !IMPORTANT! below line arbitrarily adds the image into an ndarray of images, since this is the input the model accepts. Assumed that in the future, resized will already contain multiple images (3d ndarray)
-
-resized_cropped = np.array(resized_cropped)
-# print('normallized: ')
-# print(resized_cropped)
-# print(resized_cropped.shape)
-
-numberImages=np.size(resized_cropped, 0)
-# print("numberImages: " + str(numberImages))
-train_images_height = 28
-train_images_width = 28
-# print(f"Resized Reshape: {resized_cropped.shape}")
-resized_cropped= resized_cropped.reshape(numberImages, train_images_height, train_images_width, 1)
-# print(resized_cropped[0])
-# print(f"Resized Reshape: {resized_cropped.shape}")
-
-predictions=model.predict(resized_cropped)
-# print('done')
-converted = np.argmax(predictions, axis=-1)
-print(converted)
-print(list(mapping[i] for i in converted))
 
 # # MATH PREDICTIONS WITH EMNIST MODEL---------------------------------------
 # mapping = {    
