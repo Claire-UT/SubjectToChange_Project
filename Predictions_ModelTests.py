@@ -24,7 +24,7 @@ INSTRUCTIONS
         3. The function will return the predicted text as a list
         
     For using the test functions:
-        1. Comment / uncomment the desired test functions at the end of this file
+        1. Uncomment the test functions section at the end of this file
         2. Run the file.
         3. The function will output the plot of images examined, the predicted characters, the actual characters, and the accuracy of the example.
 """
@@ -488,18 +488,17 @@ def MathMLP_test (math_MLP_model, images_height, images_width):
     example_accuracy=correct/len(test_labels) * 100
     print(f"Accuracy in Example: {example_accuracy}%")
     
-    
-#DEMOING TESTS ---------------------------------------------------------------------------------------------
-# importing all models
-EMNIST_model = keras.models.load_model('EMNIST Model')
-math_CNN_model = keras.models.load_model('Math CNN Model')
-with open('Math MLP Model.pkl', 'rb') as f:
-    math_MLP_model = pickle.load(f)
+# #DEMOING TESTS ---------------------------------------------------------------------------------------------
+# # importing all models
+# EMNIST_model = keras.models.load_model('EMNIST Model')
+# math_CNN_model = keras.models.load_model('Math CNN Model')
+# with open('Math MLP Model.pkl', 'rb') as f:
+#     math_MLP_model = pickle.load(f)
 
-# calling all test functions
-images_height=28
-images_width=28
+# # calling all test functions
+# images_height=28
+# images_width=28
 
-EMNIST_test (EMNIST_model, images_height, images_width)
-MathCNN_test (math_CNN_model, images_height, images_width)
-MathMLP_test(math_MLP_model, images_height, images_width)
+# EMNIST_test (EMNIST_model, images_height, images_width)
+# MathCNN_test (math_CNN_model, images_height, images_width)
+# MathMLP_test(math_MLP_model, images_height, images_width)
