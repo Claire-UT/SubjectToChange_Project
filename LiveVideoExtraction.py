@@ -63,14 +63,14 @@ while True:
         old_image_width = w
         new_image_width = max(w,h)
         new_image_height = max(w,h)
-        mask = np.full((new_image_height,new_image_width), 255, dtype=np.uint8)
+        mask = np.full((new_image_height,new_image_width), 0, dtype=np.uint8)
         
         # compute center offset
         x_center = (new_image_width - old_image_width) // 2
         y_center = (new_image_height - old_image_height) // 2
         
-        invthresh = cv2.bitwise_not(thresh1)
-        cropped = invthresh[y:y+h,x:x+w]
+        #invthresh = cv2.bitwise_not(thresh1)
+        cropped = thresh1[y:y+h,x:x+w]
     
         # copy img image into center of result image
         mask[y_center:y_center+old_image_height,x_center:x_center+old_image_width] = cropped

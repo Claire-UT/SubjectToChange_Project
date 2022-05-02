@@ -3,25 +3,25 @@ import cv2
 import numpy as np
  
 #Read image from which text needs to be extracted
-# img = cv2.imread("DavidTest.jpg")
-# cv2.imshow('Original', img)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+img = cv2.imread("Groot.png")
+cv2.imshow('Original', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
-def show_image(image):
-    cv2.imshow('image',img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+# def show_image(image):
+#     cv2.imshow('image',img)
+#     cv2.waitKey(0)
+#     cv2.destroyAllWindows()
 
-cam = cv2.VideoCapture(0)
-result, img = cam.read()
+# cam = cv2.VideoCapture(0)
+# result, img = cam.read()
 
-good = False
-while not good:
-    result, image = cam.read()
-    show_image(img)
-    if input("good?") == 'y':
-        good = True
+# good = False
+# while not good:
+#     result, image = cam.read()
+#     show_image(img)
+#     if input("good?") == 'y':
+#         good = True
 
 # Preprocessing the image starts
 
@@ -69,9 +69,8 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 # Finding contours
-contours, hierarchy = cv2.findContours(dilation, cv2.RETR_EXTERNAL,
-                                                 cv2.CHAIN_APPROX_NONE)
- 
+contours, hierarchy = cv2.findContours(dilation, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
 # Creating a copy of image
 im2 = img.copy()
 
@@ -88,14 +87,17 @@ for cnt in contours:
     old_image_width = w
     new_image_width = max(w,h)
     new_image_height = max(w,h)
-    mask = np.full((new_image_height,new_image_width), 255, dtype=np.uint8)
+    mask = np.full((new_image_height,new_image_width), 0, dtype=np.uint8)
     
     # compute center offset
     x_center = (new_image_width - old_image_width) // 2
     y_center = (new_image_height - old_image_height) // 2
     
-    invthresh = cv2.bitwise_not(thresh1)
-    cropped = invthresh[y:y+h,x:x+w]
+    #invthresh = cv2.bitwise_not(thresh1)
+    cropped = thresh1[y:y+h,x:x+w]
+    cv2.imshow('Cropped',cropped)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     # copy img image into center of result image
     mask[y_center:y_center+old_image_height,x_center:x_center+old_image_width] = cropped
@@ -104,7 +106,7 @@ for cnt in contours:
     resized_cropped = cv2.resize(mask, dim, interpolation = cv2.INTER_AREA)
     Big = cv2.resize(mask, (280,280),interpolation = cv2.INTER_AREA)
     
-    #print(resized_cropped.astype('int'))
+    print(resized_cropped.astype('int'))
     #cv2.imshow('28x28 Image', resized_cropped)
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
