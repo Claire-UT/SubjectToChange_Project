@@ -113,15 +113,16 @@ def sortLetters(letters):
     by_line = []
     
     # Assign a line number to each contour
-    for x, y, w, h in by_y:
-        if y > line_y + max_height:
+    for letter, loc in by_y:
+        if loc[1] > line_y + max_height:
             line_y = y
             line += 1
-            by_line.append((line, x, y, w, h))
+            by_line.append([line,letter,loc])
             # This will now sort automatically by line then by x
-            letters_sorted = [(x, y, w, h) for line, x, y, w, h in sorted(by_line)]
+            letters_sorted = [(letter,loc) for line, letter, loc in sorted(by_line)]
     # for x, y, w, h in contours:
     #     print(f"{x:4} {y:4} {w:4} {h:4}")
+    return letters_sorted
    
 def pullEquations(img):
     hsvImage = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -211,7 +212,7 @@ EMNIST_model = keras.models.load_model('EMNIST Model')
 img = cv2.imread('DavidTest.jpg') 
 
 #Pull boxed equations from image
-# img, equations = pullEquations(img)
+img, equations = pullEquations(img)
 
 #Process image, get contours of individual letters
 contours, newImg = processImage(img)
@@ -228,10 +229,14 @@ letterImages = cropLetters(contours, newImg, dim)
 #Predict letters based on cropped images
 letterList =  [letter[0] for letter in letterImages]
 locationList = [letter[1] for letter in letterImages]
+
+letterList = np.asarray(letterList)
+letterList = cv2.bitwise_not(letterList)
 predictions = EMNIST_predict(letterList,EMNIST_model,28,28)
 merged_list = tuple(zip(predictions, locationList))
 
 #Sort letters into words and add to full image
+sortedLetters = sortLetters(merged_list)
 img, words = printWordsToScreen(merged_list,wordContours, img)
 
 #Make pdf
