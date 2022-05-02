@@ -41,7 +41,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('0')
 
@@ -50,7 +51,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('1')
 
@@ -59,7 +61,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('2')
 
@@ -68,7 +71,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('3')
     
@@ -77,7 +81,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('4')
     
@@ -86,7 +91,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('5')
 
@@ -95,7 +101,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('6')
     
@@ -104,7 +111,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('7')
     
@@ -113,7 +121,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('8')
     
@@ -122,7 +131,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('9')
     
@@ -131,7 +141,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('10')
     
@@ -140,7 +151,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('11')
     
@@ -149,7 +161,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('12')
     
@@ -158,7 +171,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('13')
     
@@ -167,7 +181,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('14')
     
@@ -176,7 +191,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('15')
     
@@ -185,7 +201,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('16')
     
@@ -194,7 +211,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('17')
     
@@ -203,7 +221,8 @@ for f in os.listdir(path):
     image=Image.open(os.path.join(path,f))
     image=np.array(image)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    image2=cv2.resize(image, dsize=(dim,dim), interpolation=cv2.INTER_LINEAR)
+    image=cv2.bitwise_not(image)
+    image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
     imgs.append(image2)
     labels.append('18')
 
