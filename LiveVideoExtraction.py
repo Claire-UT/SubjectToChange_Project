@@ -7,7 +7,7 @@ def show_image(image):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(1)
 
 while True:
 
@@ -83,9 +83,9 @@ while True:
         #cv2.imshow('28x28 Image', resized_cropped)
         #cv2.waitKey(0)
         #cv2.destroyAllWindows()
-    # cv2.imshow('280x280 Image', Big)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    cv2.imshow('280x280 Image', Big)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
