@@ -2,8 +2,11 @@
 
 # QUICK START GUIDE
 Download all files off the Main branch of the Github Repo 
-The most important files are Demo_main.py, Predictions_ModelTests.py, EMNIST Math CNN Model folder, EMNIST Model folder, Math CNN Model folder, Math MLP Model.pkl
-Open the file **Demo_main.py**.
+
+The most important files are Demo_main.py, Predictions_ModelTests.py, EMNIST Math CNN Model folder, EMNIST Model folder, Math CNN Model folder, Math MLP Model.pkl 
+
+Open the file **Demo_main.py**, and hit run.
+(This is with a pre-trained model, to train your own models check the Datasets and Model Training sections)
 
 # ABOUT EACH FILE & FUNCTIONALITY
 REAL TIME OPTICAL CHARACTER RECOGNITION
@@ -11,8 +14,6 @@ Run main?
 
 ## USING & TESTING MODELS
 **'Predictions_ModelTests.py'** - This file contains the functions used for predicting characters with the already trained models. 
-A single image must be formatted as a numpy array of size 28x28 storing the grayscale value of each pixel. 
-
 Each 'predict' function is capable of handling an 'image' parameter that is a 2d array (single image) or 3d array (multiple images).
 
 For using the 'predict' functions:
@@ -39,19 +40,19 @@ If you want to retrain the models, you will need to download the datasets.
 
 ## MODEL TRAINING
 **'EMNIST_Model.py'** - install the EMNIST data set, and run the file to train the EMNIST_model.
-Stores best points in the ‘Best_points.h5’ file
-Stores model in the ‘EMNIST Model’ folder
+* Stores best points in the ‘Best_points.h5’ file
+* Stores model in the ‘EMNIST Model’ folder
 
 **'Math CNN Model.py'** - install the MATH data set, and run the file to train the math_CNN_model.
-Stores best points in the ‘Best_points_Math.h5’ file
-Stores model in the ‘Math CNN Model’ folder
+* Stores best points in the ‘Best_points_Math.h5’ file
+* Stores model in the ‘Math CNN Model’ folder
 
 **'Math MLP Model.py'** - install the MATH data set, and run the file to train the math_MLP_model.
-Stores model in the ‘Math MLP Model.pkl’ file
+* Stores model in the ‘Math MLP Model.pkl’ file
 
 **'EMNIST_Math_CNN Model.py'** - install the EMNIST and MATH data sets, and run the file to train the EMNISTmath_model.
-Stores best points in the ‘Best_points_EMNISTMath.h5’ file
-Stores model in the ‘EMNIST Math CNN Model’ folder
+* Stores best points in the ‘Best_points_EMNISTMath.h5’ file
+* Stores model in the ‘EMNIST Math CNN Model’ folder
 
 ## Enable LaTeX OUTPUT
 1. pip install pylatex
