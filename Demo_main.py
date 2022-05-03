@@ -19,7 +19,7 @@ def show_image(image):
 def inBound(bound1, bound2, loc):
     return bound1[0] <= loc[0] and bound2[0] >= loc[0] and bound1[1] <= loc[1] and bound2[1] >= loc[1]
 
-def processImage(img):
+def processImage(img,th):
     # Preprocessing the image starts
     
     #Smooth the image
@@ -32,7 +32,7 @@ def processImage(img):
      
     # Performing OTSU threshold
     # ret, thresh1 = cv2.threshold(gray, 100, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
-    ret, thresh1 = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY_INV)
+    ret, thresh1 = cv2.threshold(gray, th, 255, cv2.THRESH_BINARY_INV)
     #thresh1 = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 115, 1)
     # show_image(thresh1)
     
@@ -229,7 +229,7 @@ def makePDF(words,title):
 #     img, equations = pullEquations(img)
 
 #     #Process image, get contours of individual letters
-#     contours, newImg = processImage(img)
+#     contours, newImg = processImage(img,50)
 
 #     #Pull contours for words from the image
 #     wordContours = getWordBounds(newImg)
@@ -246,17 +246,18 @@ def makePDF(words,title):
 
 #     letterList = np.asarray(letterList)
 #     letterList = cv2.bitwise_not(letterList)
-#     predictions = EMNIST_predict(letterList,EMNIST_model,28,28)
-#     # predictions = MathCNN_predict(letterList,Math_model,28,28)
-#     # predictions = EMNISTMathCNN_predict(letterList,Math_EMNIST_model,28,28)
-#     merged_list = tuple(zip(predictions, locationList))
-
-#     #Sort letters into words and add to full image
-#     sortedLetters = sortLetters(merged_list)
-#     img, words = printWordsToScreen(sortedLetters,wordContours, img)
-
-#     #Make pdf
-#     out = words + equations
+#     if letterList is not None:
+#         # predictions = EMNIST_predict(letterList,EMNIST_model,28,28)
+#         # predictions = MathCNN_predict(letterList,Math_model,28,28)
+#         predictions = EMNISTMathCNN_predict(letterList,Math_EMNIST_model,28,28)
+#         merged_list = tuple(zip(predictions, locationList))
+        
+#         #Sort letters into words and add to full image
+#         sortedLetters = sortLetters(merged_list)
+#         img, words = printWordsToScreen(sortedLetters,wordContours, img)
+        
+#         #Make pdf
+#         out = words + equations
 
 #     cv2.imshow('LiveStream', img)  
 #     if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -282,7 +283,7 @@ img = cv2.imread('test2.jpg')
 img, equations = pullEquations(img)
 
 #Process image, get contours of individual letters
-contours, newImg = processImage(img)
+contours, newImg = processImage(img,130)
 
 #Pull contours for words from the image
 wordContours = getWordBounds(newImg)
