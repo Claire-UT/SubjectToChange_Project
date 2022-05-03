@@ -152,6 +152,51 @@ def MathMLP_predict (image, math_MLP_model, images_height, images_width):
     print(predicted_text)
     return predicted_text
 
+def EMNISTMathCNN_predict (image, EMNISTmath_model, images_height, images_width):
+    mapping = {    
+        # digits
+        0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9',
+        
+        # capital lettes
+        10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F', 16: 'G', 17: 'H', 18: 'I', 19: 'J', 
+        20: 'K', 21: 'L', 22: 'M', 23: 'N', 24: 'O', 25: 'P', 26: 'Q', 27: 'R', 28: 'S', 29: 'T',
+        30: 'U', 31: 'V', 32: 'W', 33: 'X', 34: 'Y', 35: 'Z',
+        
+        # lowercase letters
+        36: 'a', 37: 'b', 38: 'c', 39: 'd', 40: 'e', 41: 'f', 42: 'g', 43: 'h', 44: 'i', 45: 'j', 46: 'k',
+        47: 'l', 48: 'm', 49: 'n', 50: 'o', 51: 'p', 52: 'q', 53: 'r', 54: 's', 55: 't', 56: 'u', 57: 'v',
+        58: 'w', 59: 'x', 60: 'y', 61: 'z',
+        
+        # math characters
+        62: '+', 63: '.', 64: '/', 65: '=', 66: '*', 67: '-',
+        }
+
+    #converting image to a np array, and coverting to float
+    image=np.array(image)
+    image = image.astype(float)
+    
+    #if converting only one character, need to manually add another dimension
+    if image.ndim ==2:
+        image=[image]
+    
+    #normalizing 3d array wrt to 255, so all grayscale values become 0 to 1.
+    image=np.array(image)      
+    image = image / 255.0
+    
+    # reshaping array to match shape required by the model
+    numberImages=np.size(image, 0)
+    image=np.array(image)
+    image= image.reshape(numberImages, images_height, images_width, 1)
+    
+    # predicting value
+    prediction=EMNISTmath_model.predict(image)
+    converted = np.argmax(prediction, axis=-1)
+    
+    #associating the label to an 'math' character
+    predicted_text=list(mapping[int(i)] for i in converted)
+    # print(predicted_text)
+    return predicted_text
+
 # TEST FUNCTIONS -----------------------------------------------------------------------------------
 # shows the accuracy of predictions from EMNIST's own set of test images
 def EMNIST_test (EMNIST_model, images_height, images_width):
@@ -507,17 +552,146 @@ def MathMLP_test (math_MLP_model, images_height, images_width):
     example_accuracy=correct/len(test_labels) * 100
     print(f"Accuracy in Example: {example_accuracy}%")
     
-# #DEMOING TESTS ---------------------------------------------------------------------------------------------
-# # importing all models
-# EMNIST_model = keras.models.load_model('EMNIST Model')
-# math_CNN_model = keras.models.load_model('Math CNN Model')
-# with open('Math MLP Model.pkl', 'rb') as f:
-#     math_MLP_model = pickle.load(f)
+def EMNISTMathCNN_test (EMNISTmath_model, images_height, images_width):
+    print(" ")
+    print("EMNIST Math CNN Test")    
+    mapping = {    
+        # digits
+        0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9',
+            
+        # capital lettes
+        10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F', 16: 'G', 17: 'H', 18: 'I', 19: 'J', 
+        20: 'K', 21: 'L', 22: 'M', 23: 'N', 24: 'O', 25: 'P', 26: 'Q', 27: 'R', 28: 'S', 29: 'T',
+        30: 'U', 31: 'V', 32: 'W', 33: 'X', 34: 'Y', 35: 'Z',
+        
+        # lowercase letters
+        36: 'a', 37: 'b', 38: 'c', 39: 'd', 40: 'e', 41: 'f', 42: 'g', 43: 'h', 44: 'i', 45: 'j', 46: 'k',
+        47: 'l', 48: 'm', 49: 'n', 50: 'o', 51: 'p', 52: 'q', 53: 'r', 54: 's', 55: 't', 56: 'u', 57: 'v',
+        58: 'w', 59: 'x', 60: 'y', 61: 'z',
+            
+        # math characters
+        62: '+', 63: '.', 64: '/', 65: '=', 66: '*', 67: '-',
+        }
+    #loading math data
+    imgs = []
+    labels=[]
+    
+    path = "dataset/add"
+    for f in os.listdir(path):
+        image=Image.open(os.path.join(path,f))
+        image=np.array(image)
+        image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+        image=cv2.bitwise_not(image)
+        image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+        imgs.append(image2)
+        labels.append('62')
+        
+    path = "dataset/dec"
+    for f in os.listdir(path):
+        image=Image.open(os.path.join(path,f))
+        image=np.array(image)
+        image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+        image=cv2.bitwise_not(image)
+        image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+        imgs.append(image2)
+        labels.append('63')
+        
+    path = "dataset/div"
+    for f in os.listdir(path):
+        image=Image.open(os.path.join(path,f))
+        image=np.array(image)
+        image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+        image=cv2.bitwise_not(image)
+        image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+        imgs.append(image2)
+        labels.append('64')
+        
+    path = "dataset/eq"
+    for f in os.listdir(path):
+        image=Image.open(os.path.join(path,f))
+        image=np.array(image)
+        image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+        image=cv2.bitwise_not(image)
+        image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+        imgs.append(image2)
+        labels.append('65')
+        
+    path = "dataset/mul"
+    for f in os.listdir(path):
+        image=Image.open(os.path.join(path,f))
+        image=np.array(image)
+        image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+        image=cv2.bitwise_not(image)
+        image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+        imgs.append(image2)
+        labels.append('66')
+        
+    path = "dataset/sub"
+    for f in os.listdir(path):
+        image=Image.open(os.path.join(path,f))
+        image=np.array(image)
+        image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+        image=cv2.bitwise_not(image)
+        image2=cv2.resize(image, dsize=(28,28), interpolation=cv2.INTER_LINEAR)
+        imgs.append(image2)
+        labels.append('67')
+        
+    #randomizing math dataset
+    MATHtrain_images, MATHtest_images, MATHtrain_labels, MATHtest_labels = train_test_split(imgs, labels, test_size=0.1, random_state=40)
+    
+    # loading EMNIST data:
+    from emnist import extract_test_samples
+    test_images, test_labels = extract_test_samples('byclass')
+    
+    #randomizing EMNIST dataset
+    train_images, test_images, train_labels,test_labels = train_test_split(test_images, test_labels, test_size=0.1, random_state=40)
+    #keeping only 10 EMNIST images for testing
+    test_images=np.asarray(test_images[0:10])
+    test_labels=np.asarray(test_labels[0:10])
+    
+    #appending 5 Math images to EMNIST images for testing
+    test_labels= np.append(test_labels, MATHtest_labels[10:15])
+    test_images=np.concatenate((test_images, MATHtest_images[10:15]),axis=0)
+    
+    #normalizing wrt 255
+    test_images=test_images/255
+        
+    # predicting the selected test_images
+    output=EMNISTmath_model.predict(test_images[0:15])
+    converted = np.argmax(output, axis=-1)
+    predicted_text=list(mapping[int(i)] for i in converted)
+    print(f"Predicted Characters: {predicted_text}")
 
-# # calling all test functions
-# images_height=28
-# images_width=28
+    actual=np.asarray(test_labels[0:15])
+    actual_text=list(mapping[int(i)] for i in actual)
+    print(f"Actual Characters:    {actual_text}")
+        
+    #plotting the selected test_images
+    fig,axes = plt.subplots(3,5,figsize=(10,8))
+    for i,ax in enumerate(axes.flat):
+        ax.imshow(test_images[i])
+
+    # finding the percent correct in the example test_images
+    correct=0
+    for i in range(0,len(actual_text[0:15])):
+        if predicted_text[i] == actual_text[i]:
+            correct+=1
+    example_accuracy=correct/len(actual_text) * 100
+    print(f"Accuracy in Example: {example_accuracy}%")
+        
+#DEMOING TESTS ---------------------------------------------------------------------------------------------
+# importing all models
+EMNIST_model = keras.models.load_model('EMNIST Model')
+math_CNN_model = keras.models.load_model('Math CNN Model')
+with open('Math MLP Model.pkl', 'rb') as f:
+    math_MLP_model = pickle.load(f)
+EMNISTmath_model = keras.models.load_model('EMNIST Math CNN Model')
+
+# calling all test functions
+images_height=28
+images_width=28
 
 # EMNIST_test (EMNIST_model, images_height, images_width)
 # MathCNN_test (math_CNN_model, images_height, images_width)
 # MathMLP_test(math_MLP_model, images_height, images_width)
+EMNISTMathCNN_test(EMNISTmath_model, images_height, images_width)
