@@ -3,9 +3,9 @@
 Team 6- Subject to Change
 Members- Laura Homiller, David Spitler, Claire Zhang
 
-This file contains the functinos used for predicting characters. 
+This file contains the functions used for predicting characters. 
 A single image must be formatted as a numpy array of size 28x28 storing the grayscale value of each pixel.  
-Each test function is capable of handling an 'image' parameter that is a 2d array (single image) or 3d array (multiple images)
+Each 'predict' function is capable of handling an 'image' parameter that is a 2d array (single image) or 3d array (multiple images)
     The EMNIST_model is trained by running 'EMNIST_Model.py'
     The math_CNN_model is trained by running 'Math CNN Model.py'
     The math_MLP_model is trained by running 'Math MLP Model.py'
@@ -19,15 +19,20 @@ To obtain the Math dataset, visit https://www.kaggle.com/datasets/sagyamthapa/ha
     -Open folder '9' and delete the directory file.
     
 INSTRUCTIONS
-    For using the prediction functions:
-        1. Import the relevent function into your file.
-        2. Call the function with correct parameters
+    For using the 'predict' functions:
+        1. Import the relevant function into your file.
+        2. Call the function with correct parameters. 
+                - 'image' is either a 2D array (28x28) or 3D array (?x28x28) storing the grayscale value of each pixel
+                - '...model' pass in the correct model
+                - 'images_height' = 28, unless trained on new dimensions
+                - 'images_width' = 28, unless trained on new dimensions
         3. The function will return the predicted text as a list
         
     For using the test functions:
-        1. Uncomment the test functions section at the end of this file
-        2. Run the file.
-        3. The function will output the plot of images examined, the predicted characters, the actual characters, and the accuracy of the example.
+        1. Donwload the datasets
+        2. Uncomment the DEMOING TESTS section at the end of this file
+        3. Run the file
+        4. The function will output the plot of images examined, the predicted characters, the actual characters, and the accuracy of the example.
 """
 import cv2
 import numpy as np
