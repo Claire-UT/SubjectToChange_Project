@@ -3,10 +3,10 @@ import cv2
 import numpy as np
 import keras
 from Predictions_ModelTests import *
-from pylatex import Document, Section, Subsection, Tabular, Math, TikZ, Axis, \
-    Plot, Figure, Matrix, Alignat
-from pylatex.utils import italic
-from pdflatex import PDFLaTeX
+# from pylatex import Document, Section, Subsection, Tabular, Math, TikZ, Axis, \
+#     Plot, Figure, Matrix, Alignat
+# from pylatex.utils import italic
+# from pdflatex import PDFLaTeX
 import os
 import platform
 import subprocess
@@ -104,6 +104,7 @@ def printWordsToScreen(letters,wordContours, img):
             if inBound([x1,y1],[x2,y2],loc):
                 collectLetters += letter   
         words.append((collectLetters,[x1,y1,w,h],False))
+        #if word is placed outside image, 
         img = cv2.putText(img,collectLetters,(x1,y1-10), font, 1, (0, 0, 0), 2, cv2.LINE_4)
         img = cv2.rectangle(img,(x1,y1),(x2,y2),(0, 255, 0),3)
     return img, words
@@ -147,13 +148,13 @@ def sortWords(letters):
     # Assign a line number to each contour
     for letter, loc, t in by_y:
         #Might have to adjust max_height based on scale
-        if loc[1] > line_y + max_height:
-            line_y = loc[1]
-            print(line_y)
+        if loc[1] > line_y + 0.7*max_height:
+            # line_y = loc[1]
             line += 1
         by_line.append([line,letter,loc,t])
+        line_y = loc[1]
     # Sort by line then by x
-    letters_sorted = [(letter,loc,t) for line, letter, loc, t in sorted(by_line, key = lambda x: (x[0], x[2][0]))]
+    letters_sorted = [(letter,loc,t) for line, letter, loc, t in sorted(by_line, key = lambda x: [x[0], x[2][0]])]
 
     return letters_sorted
    
@@ -184,6 +185,7 @@ def pullEquations(img):
 
         
 def makePDF(words,title):
+    pathToPDFLatex = 'C:\\Users\\laura\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex'
     geometry_options = {"tmargin": "5cm", "lmargin": "5cm"}
     doc = Document(geometry_options=geometry_options)
 
@@ -206,7 +208,7 @@ def makePDF(words,title):
     doc.generate_tex('demo_output')
     # Change to directory where pdflatex is located
     #Can also comment this out and only generate TeX file
-    subprocess.call("C:\\Users\\laura\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex demo_output.tex")
+    subprocess.call(pathToPDFLatex + " demo_output.tex")
     os.startfile('demo_output.pdf')
         
 ##########################################################################
@@ -216,6 +218,7 @@ def makePDF(words,title):
 # cam = cv2.VideoCapture(0)
 # EMNIST_model = keras.models.load_model('EMNIST Model')
 # Math_model = keras.models.load_model('Math CNN Model')
+# Math_EMNIST_model = keras.models.load_model('EMNIST Math CNN Model')
 
 # while True:
 
@@ -245,6 +248,7 @@ def makePDF(words,title):
 #     letterList = cv2.bitwise_not(letterList)
 #     predictions = EMNIST_predict(letterList,EMNIST_model,28,28)
 #     # predictions = MathCNN_predict(letterList,Math_model,28,28)
+#     # predictions = EMNISTMathCNN_predict(letterList,Math_EMNIST_model,28,28)
 #     merged_list = tuple(zip(predictions, locationList))
 
 #     #Sort letters into words and add to full image
@@ -269,6 +273,7 @@ def makePDF(words,title):
 
 EMNIST_model = keras.models.load_model('EMNIST Model')
 Math_model = keras.models.load_model('Math CNN Model')
+Math_EMNIST_model = keras.models.load_model('EMNIST Math CNN Model')
 
 #Read from the image file
 img = cv2.imread('test2.jpg') 
@@ -296,6 +301,7 @@ letterList = np.asarray(letterList)
 letterList = cv2.bitwise_not(letterList)
 predictions = EMNIST_predict(letterList,EMNIST_model,28,28)
 # predictions = MathCNN_predict(letterList,Math_model,28,28)
+# predictions = EMNISTMathCNN_predict(letterList,Math_EMNIST_model,28,28)
 merged_list = tuple(zip(predictions, locationList))
 
 #Sort letters into words and add to full image
