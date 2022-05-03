@@ -9,8 +9,22 @@ Open the file **Demo_main.py**, and hit run.
 (This is with a pre-trained model, to train your own models check the Datasets and Model Training sections)
 
 # ABOUT EACH FILE & FUNCTIONALITY
-REAL TIME OPTICAL CHARACTER RECOGNITION
-Run main?
+## REAL TIME OPTICAL CHARACTER RECOGNITION
+Real time OCR will run and work automatically when running Demo_main.py
+
+If you wish to update any settings for your specific environment, general tips are provided below:
+
+*Smooth* - image is currently smoothed twice in pre-processing. If your image is blurry to start with, delete “smooth” and replace the input for “gray” with “smooth1” to only smooth the image once.
+
+*Thresholding* - The image threshold is currently set for a bright environment and thresholds anything above a “0” grayscale value. For darker environments, increase this threshold value. A threshold of “100” is a good place to start.
+
+*Blur* - To increase the area blurred, “3” can be increased to a higher odd number. This is the kernel size that is being blurred.
+
+*Dilation* - Dilation combines disjointed letters like “i” and “j” to ensure they are contoured together. If need be, dilation iterations can be increased from 1 to 2 for letters that are disjointed by large distances.
+
+*Dilation2* - Dilation 2 is used to join words or equations together for contouring the output region. Current iterations are set to 4. Decrease this if words are generally close together, or increase this if letters are generally far apart within the same word. 
+
+If your training data is a black letter on a white background, uncomment “invthresh”, change “cropped” to equal invthresh[y:y+h,x:x+w], and change the 0 in mask to be 255.
 
 ## USING & TESTING MODELS
 **'Predictions_ModelTests.py'** - This file contains the functions used for predicting characters with the already trained models. 
