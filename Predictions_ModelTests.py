@@ -9,6 +9,7 @@ Each test function is capable of handling an 'image' parameter that is a 2d arra
     The EMNIST_model is trained by running 'EMNIST_Model.py'
     The math_CNN_model is trained by running 'Math CNN Model.py'
     The math_MLP_model is trained by running 'Math MLP Model.py'
+    The EMNISTmath_model is trained by running 'EMNIST_Math_CNN Model.py'
 
 This file also has 'test' functions that can be called to show the accuracy of each model on its own test data
 To use the test functions, you must have the EMNIST dataset and 'Math' dataset.
