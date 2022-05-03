@@ -3,6 +3,7 @@
 # QUICK START GUIDE
 Download all files off the Main branch of the Github Repo 
 
+You may need to install packages such as tensorflow, openCV, os.
 Open the file **Demo_main.py**, and hit run.
 This is with a pre-trained model, to train your own models check the Datasets and Model Training sections.
 
