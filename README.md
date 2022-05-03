@@ -3,10 +3,12 @@
 # QUICK START GUIDE
 Download all files off the Main branch of the Github Repo 
 
-The most important files are Demo_main.py, Predictions_ModelTests.py, EMNIST Math CNN Model folder, EMNIST Model folder, Math CNN Model folder, Math MLP Model.pkl 
-
 Open the file **Demo_main.py**, and hit run.
-(This is with a pre-trained model, to train your own models check the Datasets and Model Training sections)
+This is with a pre-trained model, to train your own models check the Datasets and Model Training sections.
+
+Demo_main.py is currently commented to detect and display the text from “test2.jpg”. This can be changed to any .jpg or .png file. To run Demo_main using the real time camera detection, comment out everything after “FROM IMAGE” and uncomment the “FROM CAMERA” section. 
+
+Note: FROM CAMERA uses cv2.VideoCapture(0), which is usually a laptop's built-in webcam. If using a USB webcam, “cam” may need to be changed to cv2.VideoCapture(1).
 
 # ABOUT EACH FILE & FUNCTIONALITY
 ## REAL TIME OPTICAL CHARACTER RECOGNITION
@@ -24,10 +26,14 @@ If you wish to update any settings for your specific environment, general tips a
 
 *Dilation2* - Dilation 2 is used to join words or equations together for contouring the output region. Current iterations are set to 4. Decrease this if words are generally close together, or increase this if letters are generally far apart within the same word. 
 
-If your training data is a black letter on a white background, uncomment “invthresh”, change “cropped” to equal invthresh[y:y+h,x:x+w], and change the 0 in mask to be 255.
+*Dim* - Currently, all detected characters are resized to 28x28 pixels. To change this size, change “dim” to equal your desired image size.
+
+If your training data is a black letter on a white background, uncomment “invthresh”, change “cropped” to equal invthresh[y:y+h,x:x+w], and change the 0 in “mask” to be 255.
 
 ## USING & TESTING MODELS
-**'Predictions_ModelTests.py'** - This file contains the functions used for predicting characters with the already trained models. 
+**'Predictions_ModelTests.py'** - This file contains the functions used for predicting characters. 
+A single image must be formatted as a numpy array of size 28x28 storing the grayscale value of each pixel. 
+
 Each 'predict' function is capable of handling an 'image' parameter that is a 2d array (single image) or 3d array (multiple images).
 
 For using the 'predict' functions:
@@ -68,9 +74,11 @@ If you want to retrain the models, you will need to download the datasets.
 * Stores best points in the ‘Best_points_EMNISTMath.h5’ file
 * Stores model in the ‘EMNIST Math CNN Model’ folder
 
+
 ## Enable LaTeX OUTPUT
 1. pip install pylatex
-2. Install a LateX compiler (MiKTeX worked well for Windows)
-4. Uncomment lines 6-9 to import required packages
-5. Modify path in makePDF function to point to location of pdflatex (or other compiler)
-7. Uncomment call to makePDF at end of main to enable output
+2. Install a LaTeX compiler (MiKTeX worked well for Windows)
+3. Uncomment lines 6-9 in ‘Demo_main.py’ to import required packages
+4. Modify path in makePDF function to point to location of pdflatex (or other compiler)
+5. Uncomment call to makePDF at end of ‘Demo_main.py’ to enable output
+
