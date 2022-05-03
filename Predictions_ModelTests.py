@@ -700,4 +700,4 @@ images_width=28
 # EMNIST_test (EMNIST_model, images_height, images_width)
 # MathCNN_test (math_CNN_model, images_height, images_width)
 # MathMLP_test(math_MLP_model, images_height, images_width)
-EMNISTMathCNN_test(EMNISTmath_model, images_height, images_width)
+# EMNISTMathCNN_test(EMNISTmath_model, images_height, images_width)
