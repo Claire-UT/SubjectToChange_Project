@@ -2,8 +2,8 @@
 
 # QUICK START GUIDE
 Download all files off the Main branch of the Github Repo 
-
-Open the file ""
+The most important files are Demo_main.py, Predictions_ModelTests.py, EMNIST Math CNN Model folder, EMNIST Model folder, Math CNN Model folder, Math MLP Model.pkl
+Open the file **Demo_main.py**.
 
 # ABOUT EACH FILE & FUNCTIONALITY
 REAL TIME OPTICAL CHARACTER RECOGNITION
