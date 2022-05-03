@@ -52,3 +52,10 @@ Stores model in the ‘Math MLP Model.pkl’ file
 **'EMNIST_Math_CNN Model.py'** - install the EMNIST and MATH data sets, and run the file to train the EMNISTmath_model.
 Stores best points in the ‘Best_points_EMNISTMath.h5’ file
 Stores model in the ‘EMNIST Math CNN Model’ folder
+
+## Enable LaTeX OUTPUT
+1. pip install pylatex
+2. Install a LateX compiler (MiKTeX worked well for Windows)
+4. Uncomment lines 6-9 to import required packages
+5. Modify path in makePDF function to point to location of pdflatex (or other compiler)
+7. Uncomment call to makePDF at end of main to enable output
