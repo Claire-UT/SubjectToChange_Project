@@ -11,6 +11,8 @@ Demo_main.py is currently commented to detect and display the text from “test2
 
 Note: FROM CAMERA uses cv2.VideoCapture(0), which is usually a laptop's built-in webcam. If using a USB webcam, “cam” may need to be changed to cv2.VideoCapture(1).
 
+(The team used Python 3.9.7 to develop this project)
+
 # ABOUT EACH FILE & FUNCTIONALITY
 ## REAL TIME OPTICAL CHARACTER RECOGNITION
 Real time OCR will run and work automatically when running Demo_main.py
